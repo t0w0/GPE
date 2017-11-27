@@ -15,4 +15,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9b9569d787fc43e99b0a093751e03f0, type: 2}
   - {fileID: 11400000, guid: 75d683fb78620436d85f5891fc4cb57a, type: 2}
   - {fileID: 11400000, guid: 7318a675a0a8a41a0b2ba7a2058ee30f, type: 2}
-  _loadingTexture: {fileID: 2800000, guid: 529239097d02f9f42b0ddd436c6fcbb0, type: 3}
+  - {fileID: 11400000, guid: ec6e49fd798b140498ff3faa60b983e6, type: 2}
+  _loadingTexture: {fileID: 2800000, guid: 0dd8310b88a12aa4d816f91869f706ca, type: 3}

@@ -16,8 +16,10 @@ public class PrototypeController : MonoBehaviour {
 	public float tileScale;
 	public float tileW;
 	public Vector3 tileScreenScale;
-	public Image scaleImage;
+	public float maxScaleWidth;
+	public RectTransform scaleImage;
 	public Text scaleText;
+	public RectTransform compass;
 
 	private List<MeshRenderer> buildings = new List<MeshRenderer>();
 
@@ -39,7 +41,9 @@ public class PrototypeController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey(KeyCode.Escape))
 			Application.Quit();
-			GetScale();
+		Quaternion r = Camera.main.transform.rotation;
+		Vector3 v = r.eulerAngles;
+		compass.rotation = Quaternion.Euler( new Vector3( 0,  0, v.y ) );
 	}
 	public void GetScale () {
 		tileW = map.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.x * 2; // world units
@@ -47,8 +51,21 @@ public class PrototypeController : MonoBehaviour {
 		tileScreenScale = Camera.main.WorldToScreenPoint(new Vector3( tileW, 0, 0) ) - Camera.main.WorldToScreenPoint(Vector3.zero); // Screen Unit
 		float meterScreen = tileScreenScale.x / tileScale;
 
-		scaleImage.transform.GetComponent<RectTransform>().sizeDelta = new Vector2 (meterScreen*100, 2);
-		scaleText.text = 100 + " m";
+		float scaleW = meterScreen * 500;
+
+		if (scaleW > maxScaleWidth)
+			scaleW = meterScreen * 300; 
+		if (scaleW > maxScaleWidth)
+			scaleW = meterScreen * 100; 
+		if (scaleW > maxScaleWidth)
+			scaleW = meterScreen * 50; 
+		if (scaleW > maxScaleWidth)
+			scaleW = meterScreen * 30;
+		if (scaleW > maxScaleWidth)
+			scaleW = meterScreen * 10;
+
+		scaleImage.sizeDelta = new Vector2 (scaleW, scaleImage.sizeDelta.y);
+		scaleText.text = scaleW/meterScreen + " m";
 	}
 	public void ChangeLocation () {
 		GameObject.Destroy(GameObject.FindGameObjectWithTag("PersistantObject"));

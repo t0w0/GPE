@@ -4,6 +4,8 @@ namespace Mapbox.Examples
 
 	public class CameraMovement : MonoBehaviour
 	{
+
+		private PrototypeController protoScript;
 		[SerializeField]
 		float _panSpeed = 20f;
 
@@ -30,6 +32,7 @@ namespace Mapbox.Examples
 					throw new System.Exception("You must have a reference camera assigned!");
 				}
 			}
+			protoScript = GameObject.Find("PrototypeControl").GetComponent<PrototypeController>();
 		}
 
 		void LateUpdate()
@@ -75,6 +78,7 @@ namespace Mapbox.Examples
 				}
 				else
 					transform.localPosition += transform.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
+			protoScript.GetScale();
 			}
 		}
 	}
