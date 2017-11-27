@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d474874a8f66ab5419341d8ba4977065
+timeCreated: 1511344075
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Grand Paris
+  fontNames:
+  - Grand Paris
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a573141bebb744b4c80ca2b1285a4c80, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

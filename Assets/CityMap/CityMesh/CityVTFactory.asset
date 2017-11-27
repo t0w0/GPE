@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d97cb1cfb3f1b499c24763afa54873, type: 3}
+  m_Name: CityVTFactory
+  m_EditorClassIdentifier: 
+  _mapId: mapbox.mapbox-streets-v7
+  Visualizers:
+  - {fileID: 11400000, guid: 531485f86f82d4f1f8310f57520f36a7, type: 2}
+  - {fileID: 11400000, guid: 704468de5aec60d42bd9205c51a46ef8, type: 2}

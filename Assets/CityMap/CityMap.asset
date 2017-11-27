@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c8a90df31d41fe8057a6f85c7a3e4, type: 3}
+  m_Name: CityMap
+  m_EditorClassIdentifier: 
+  Factories:
+  - {fileID: 11400000, guid: e9b9569d787fc43e99b0a093751e03f0, type: 2}
+  - {fileID: 11400000, guid: 75d683fb78620436d85f5891fc4cb57a, type: 2}
+  - {fileID: 11400000, guid: 7318a675a0a8a41a0b2ba7a2058ee30f, type: 2}
+  _loadingTexture: {fileID: 2800000, guid: 529239097d02f9f42b0ddd436c6fcbb0, type: 3}

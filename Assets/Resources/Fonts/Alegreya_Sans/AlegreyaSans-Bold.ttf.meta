@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: d13db50521c8d4e3598ab5edbac1582a
+timeCreated: 1509962194
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Alegreya Sans
+  fontNames:
+  - Alegreya Sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 57461e3073ce149e4a7d9a4c4a1743c6, type: 3}
+  - {fileID: 12800000, guid: cf389031e7343440ca85133b6863d9cc, type: 3}
+  - {fileID: 12800000, guid: 23e95543ea82a4d52b40eb10058497a6, type: 3}
+  - {fileID: 12800000, guid: 7dacd19373b4c4748a7f4c0cae5ec7e6, type: 3}
+  - {fileID: 12800000, guid: 1f532bd319c074c548b12128e83fa661, type: 3}
+  - {fileID: 12800000, guid: 21fd39147614d4b7d9627a6a01eb3b98, type: 3}
+  - {fileID: 12800000, guid: 963eadd62bf6049c1918dc169792b073, type: 3}
+  - {fileID: 12800000, guid: cfee4317b18604c828bc5716b6095868, type: 3}
+  - {fileID: 12800000, guid: 53b6e6890f0c24f7e9a345ba37393c28, type: 3}
+  - {fileID: 12800000, guid: 51db425da8e2a470390b7d4ff4a48047, type: 3}
+  - {fileID: 12800000, guid: 3ca93b8e7f6dc47559cbc2cdee5d32c0, type: 3}
+  - {fileID: 12800000, guid: 557639ce4c33841149e26d6bb9c134cf, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

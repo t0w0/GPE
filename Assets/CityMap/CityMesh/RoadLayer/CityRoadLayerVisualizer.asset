@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120e43a7012622e49aca0c9217acd1f9, type: 3}
+  m_Name: CityRoadLayerVisualizer
+  m_EditorClassIdentifier: 
+  Active: 1
+  _classificationKey: 
+  _key: road
+  Filters: []
+  _defaultStack: {fileID: 11400000, guid: 3db2b620a28f747a881d764eebf4ee6e, type: 2}
+  Stacks:
+  - Type: major_rail
+    Stack: {fileID: 11400000, guid: 666a5b9f7e8194926a5b5e8ba0982b9e, type: 2}
+  - Type: footway
+    Stack: {fileID: 11400000, guid: 22549a3ab0611448ab1a2486ced397de, type: 2}
+  - Type: pedestrians
+    Stack: {fileID: 11400000, guid: 22549a3ab0611448ab1a2486ced397de, type: 2}
