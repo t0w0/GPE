@@ -13,6 +13,9 @@ namespace Mapbox.Examples
 		float _zoomSpeed = 50f;
 
 		[SerializeField]
+		float _rotationSpeed = 50f;
+
+		[SerializeField]
 		Camera _referenceCamera;
 
 		Quaternion _originalRotation;
@@ -80,6 +83,13 @@ namespace Mapbox.Examples
 					transform.localPosition += transform.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
 			protoScript.GetScale();
 			}
+		}
+
+		public void RotateCamera (bool clockwise) {
+			if (clockwise)
+				transform.parent.Rotate(Vector3.up * _rotationSpeed);
+			else
+				transform.parent.Rotate(Vector3.up * -_rotationSpeed);
 		}
 	}
 }

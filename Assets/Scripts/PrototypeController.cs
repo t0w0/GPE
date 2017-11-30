@@ -15,6 +15,7 @@ public class PrototypeController : MonoBehaviour {
 	private Dropdown skinDrop;
 	public float tileScale;
 	public float tileW;
+	public float tileH;
 	public Vector3 tileScreenScale;
 	public float maxScaleWidth;
 	public RectTransform scaleImage;
@@ -46,26 +47,37 @@ public class PrototypeController : MonoBehaviour {
 		compass.rotation = Quaternion.Euler( new Vector3( 0,  0, v.y ) );
 	}
 	public void GetScale () {
+		// nombre de Unity unit de la tile
 		tileW = map.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.x * 2; // world units
-		tileScale = 256 * Conversions.GetTileScaleInMeters(41.8882266f, 16); // meters
-		tileScreenScale = Camera.main.WorldToScreenPoint(new Vector3( tileW, 0, 0) ) - Camera.main.WorldToScreenPoint(Vector3.zero); // Screen Unit
-		float meterScreen = tileScreenScale.x / tileScale;
+		Debug.Log(tileW);
+		float tileD = tileW * Mathf.Sqrt(2);
 
-		float scaleW = meterScreen * 500;
+		// nombre de metre de la tile
+		tileScale = 256 * Conversions.GetTileScaleInMeters(41.8882266f, 16); // meters * 256px
+		float tileScaleD = tileScale * Mathf.Sqrt(2);
+		
+		// nombre de screenUnit de la tile;
+		tileScreenScale = Camera.main.WorldToScreenPoint(new Vector3( tileD, 0, 0) ) - Camera.main.WorldToScreenPoint(Vector3.zero); // Screen Unit
+
+		// 1 m = x screenUnit  
+		float meterScreenW = Mathf.Abs( tileScreenScale.x / tileScaleD );
+
+		float scaleW = meterScreenW * 500;
+
 
 		if (scaleW > maxScaleWidth)
-			scaleW = meterScreen * 300; 
+			scaleW = meterScreenW * 300; 
 		if (scaleW > maxScaleWidth)
-			scaleW = meterScreen * 100; 
+			scaleW = meterScreenW * 100; 
 		if (scaleW > maxScaleWidth)
-			scaleW = meterScreen * 50; 
+			scaleW = meterScreenW * 50; 
 		if (scaleW > maxScaleWidth)
-			scaleW = meterScreen * 30;
+			scaleW = meterScreenW * 30;
 		if (scaleW > maxScaleWidth)
-			scaleW = meterScreen * 10;
+			scaleW = meterScreenW * 10;
 
 		scaleImage.sizeDelta = new Vector2 (scaleW, scaleImage.sizeDelta.y);
-		scaleText.text = scaleW/meterScreen + " m";
+		scaleText.text = scaleW/meterScreenW + " m";
 	}
 	public void ChangeLocation () {
 		GameObject.Destroy(GameObject.FindGameObjectWithTag("PersistantObject"));
