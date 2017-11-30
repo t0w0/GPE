@@ -16,6 +16,9 @@ namespace Mapbox.Examples
 		float _rotationSpeed = 50f;
 
 		[SerializeField]
+		float _pitchSpeed = 50f;
+
+		[SerializeField]
 		Camera _referenceCamera;
 
 		Quaternion _originalRotation;
@@ -25,7 +28,7 @@ namespace Mapbox.Examples
 
 		void Awake()
 		{
-			_originalRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+			_originalRotation = Quaternion.Euler(0, transform.parent.eulerAngles.y, 0);
 
 			if (_referenceCamera == null)
 			{
@@ -47,8 +50,8 @@ namespace Mapbox.Examples
 			if (Input.GetMouseButton(0))
 			{
 				var mousePosition = Input.mousePosition;
-				mousePosition.z = _referenceCamera.transform.localPosition.y;
-				_delta = _referenceCamera.ScreenToWorldPoint(mousePosition) - _referenceCamera.transform.localPosition;
+				mousePosition.z = _referenceCamera.transform.parent.localPosition.y;
+				_delta = _referenceCamera.ScreenToWorldPoint(mousePosition) - _referenceCamera.transform.parent.localPosition;
 				_delta.y = 0f;
 				if (_shouldDrag == false)
 				{
@@ -64,8 +67,8 @@ namespace Mapbox.Examples
 			if (_shouldDrag == true)
 			{
 				var offset = _origin - _delta;
-				offset.y = transform.localPosition.y;
-				transform.localPosition = offset;
+				offset.y = transform.parent.localPosition.y;
+				transform.parent.localPosition = offset;
 			}
 			else
 			{
@@ -80,7 +83,7 @@ namespace Mapbox.Examples
 					//_referenceCamera.orthographicSize = Camera.main.orthographicSize += y;
 				}
 				else
-					transform.localPosition += transform.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
+					transform.parent.localPosition += transform.parent.forward * y + (_originalRotation * new Vector3(x * _panSpeed, 0, z * _panSpeed));
 			protoScript.GetScale();
 			}
 		}

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Mapbox.Unity.Utilities;
+using Mapbox.Unity.Map;
 
 public class PrototypeController : MonoBehaviour {
 
@@ -13,10 +14,7 @@ public class PrototypeController : MonoBehaviour {
 	private Light sun;
 	private Dropdown shadowDrop;
 	private Dropdown skinDrop;
-	public float tileScale;
-	public float tileW;
-	public float tileH;
-	public Vector3 tileScreenScale;
+
 	public float maxScaleWidth;
 	public RectTransform scaleImage;
 	public Text scaleText;
@@ -42,42 +40,59 @@ public class PrototypeController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey(KeyCode.Escape))
 			Application.Quit();
-		Quaternion r = Camera.main.transform.rotation;
+		Quaternion r = Camera.main.transform.parent.rotation;
 		Vector3 v = r.eulerAngles;
 		compass.rotation = Quaternion.Euler( new Vector3( 0,  0, v.y ) );
 	}
-	public void GetScale () {
-		// nombre de Unity unit de la tile
-		tileW = map.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.x * 2; // world units
-		Debug.Log(tileW);
-		float tileD = tileW * Mathf.Sqrt(2);
 
-		// nombre de metre de la tile
-		tileScale = 256 * Conversions.GetTileScaleInMeters(41.8882266f, 16); // meters * 256px
-		float tileScaleD = tileScale * Mathf.Sqrt(2);
+	public void SetRotation () {
+		Quaternion r = Camera.main.transform.parent.rotation;
+		Vector3 v = r.eulerAngles;
+		Camera.main.transform.parent.rotation = Quaternion.Euler( new Vector3( v.x,  0, v.z ) );
+		Camera.main.transform.parent.position = Vector3.zero;
+	}
+
+	public void GetScale () {
+
+		// Calcule des longueusr en unités Unity
+		float sideUnits; // longueur du coté de la tile en unité Unity
+		float diagUnits;	// longueur de la diagonale de la tile en unité Unity
+
+		sideUnits = map.transform.GetChild(0).GetComponent<MeshFilter>().mesh.bounds.extents.x * 2; // world units
+		//diagUnits = sideUnits * Mathf.Sqrt(2);
 		
-		// nombre de screenUnit de la tile;
-		tileScreenScale = Camera.main.WorldToScreenPoint(new Vector3( tileD, 0, 0) ) - Camera.main.WorldToScreenPoint(Vector3.zero); // Screen Unit
+		
+		// Calcule des longueurs en metres
+		float sideMeters; // longueur du coté de la tile en metres
+		float diagMeters; // longueur de la diagonale de la tile en metres
+		float lat = (float) map.GetComponent<AbstractMap>().coord.x;
+		int zoom = map.GetComponent<AbstractMap>().Zoom;
+		sideMeters = 256 * Conversions.GetTileScaleInMeters( lat, 16 ); // meters * 256px
+		diagMeters = sideMeters * Mathf.Sqrt(2);
+
+		
+		// Calcule des longueurs en screenUnits
+		float diagScreenUnit;
+		diagScreenUnit = Vector3.Distance( Camera.main.WorldToScreenPoint( new Vector3( sideUnits, 0, sideUnits) ), Camera.main.WorldToScreenPoint( Vector3.zero ) ); // Screen Unit
 
 		// 1 m = x screenUnit  
-		float meterScreenW = Mathf.Abs( tileScreenScale.x / tileScaleD );
+		float meterScreen = Mathf.Abs( diagScreenUnit / diagMeters );
 
-		float scaleW = meterScreenW * 500;
+		float scale = meterScreen * 500;
 
 
-		if (scaleW > maxScaleWidth)
-			scaleW = meterScreenW * 300; 
-		if (scaleW > maxScaleWidth)
-			scaleW = meterScreenW * 100; 
-		if (scaleW > maxScaleWidth)
-			scaleW = meterScreenW * 50; 
-		if (scaleW > maxScaleWidth)
-			scaleW = meterScreenW * 30;
-		if (scaleW > maxScaleWidth)
-			scaleW = meterScreenW * 10;
-
-		scaleImage.sizeDelta = new Vector2 (scaleW, scaleImage.sizeDelta.y);
-		scaleText.text = scaleW/meterScreenW + " m";
+		if (scale > maxScaleWidth)
+			scale = meterScreen * 300; 
+		if (scale > maxScaleWidth)
+			scale = meterScreen * 100; 
+		if (scale > maxScaleWidth)
+			scale = meterScreen * 50; 
+		if (scale > maxScaleWidth)
+			scale = meterScreen * 30;
+		if (scale > maxScaleWidth)
+			scale = meterScreen * 10;
+		scaleImage.sizeDelta = new Vector2 (scale, scaleImage.sizeDelta.y);
+		scaleText.text = scale/meterScreen + " m";
 	}
 	public void ChangeLocation () {
 		GameObject.Destroy(GameObject.FindGameObjectWithTag("PersistantObject"));
@@ -179,6 +194,5 @@ public class PrototypeController : MonoBehaviour {
 			}
 			break;
 		}
-
 	}
 }
